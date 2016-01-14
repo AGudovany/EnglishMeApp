@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
               android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-        >
-    <TextView
-            android:layout_width="fill_parent"
+              android:background="@color/background_color">
+    <Button
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello World, MyActivity"
-            />
+            android:text="Что в базе?"
+            android:id="@+id/buttonDB" android:onClick="onClick"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Запись"
+            android:id="@+id/textViewDB" android:textColor="@android:color/black" android:layout_weight="0.03"/>
+    <ListView android:id="@android:id/list"
+              android:layout_width="fill_parent"
+              android:background="@color/background_color"
+              android:layout_height="0dp" android:divider="@android:color/darker_gray" android:dividerHeight="0.1dp"
+              android:drawSelectorOnTop="false" android:layout_weight="1"/>
 </LinearLayout>
 
