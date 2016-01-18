@@ -1,130 +1,99 @@
 package com.example.EnglishMeApp;
 
 import android.app.ListActivity;
-import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class MyActivity extends ListActivity {
     /**
      * Called when the activity is first created.
      */
-    private TextView mHelloTextView;
-    private ListView mListView;
-    private EditText mNameEditText;
     private DatabaseHelper mDatabaseHelper;
     private SQLiteDatabase mSqLiteDatabase;
-    final String[] catNamesArray = new String[] { "Рыжик", "Барсик", "Мурзик",
-            "Мурка", "Васька", "Томасина", "Бобик", "Кристина", "Пушок",
-            "Дымка", "Кузя", "Китти", "Барбос", "Масяня", "Симба" };
-    //final String[] clientNamesArray = new String[] {};
+    private EditText mInputSearch;
+    private ListView mMainListView;
     private ArrayAdapter<String> mAdapter;
     private ArrayList<String> results = new ArrayList<String>();
-    /*private ArrayList<String> results = new ArrayList<String>();
-    private String tableName = "clients";
-    private SQLiteDatabase newDB;*/
+    private ArrayList<String> mClientList = new ArrayList<String>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*openAndQueryDatabase();
-
-        displayResultList();*/
         setContentView(R.layout.main);
+        //mMainListView = (ListView) findViewById(R.id.mainListView);
 
-        mDatabaseHelper = new DatabaseHelper(this, "englishme.db", null, 1);
+        mClientList = openAndQueryClientsListDatabase();
+        displayResultList(mClientList);
+        mInputSearch = (EditText) findViewById(R.id.searchText);
+        mInputSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-        mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
-
-        ContentValues newValues = new ContentValues();
-        // Задайте значения для каждого столбца
-        newValues.put(DatabaseHelper.NAME_COLUMN, "Рыжик");
-        newValues.put(DatabaseHelper.PHONE_COLUMN, "4954553443");
-        // Вставляем данные в таблицу
-        mSqLiteDatabase.insert("clients", null, newValues);
-
-        /*Cursor cursor = mSqLiteDatabase.query("clients", new String[]{DatabaseHelper.NAME_COLUMN,
-                        DatabaseHelper.PHONE_COLUMN, DatabaseHelper.DATE_COLUMN},
-                null, null,
-                null, null, null) ;
-        Log.w(getClass().getSimpleName(), "Move to First: " + cursor.moveToFirst());
-        while (cursor.moveToNext()) {
-            String clientName = cursor.getString(cursor.getColumnIndex(DatabaseHelper.NAME_COLUMN));
-            results.add("name: " +clientName);
-        }
-
-        mAdapter = new ArrayAdapter<String>(this,
-                R.layout.activity_custom, R.id.textView, results);
-        setListAdapter(mAdapter);
-
-        // не забываем закрывать курсор
-        cursor.close();*/
-    }
-
-    public void onClick(View view) {
-        Cursor cursor = mSqLiteDatabase.query("clients", new String[]{DatabaseHelper.NAME_COLUMN,
-                        DatabaseHelper.PHONE_COLUMN, DatabaseHelper.DATE_COLUMN},
-                null, null,
-                null, null, null) ;
-        Log.w(getClass().getSimpleName(), "Move to First: " + cursor.moveToFirst());
-        while (cursor.moveToNext()) {
-            String clientName = cursor.getString(cursor.getColumnIndex(DatabaseHelper.NAME_COLUMN));
-            results.add(clientName);
-        }
-
-        Log.w(getClass().getSimpleName(), "results size: " + results.size());
-        mAdapter = new ArrayAdapter<String>(this,
-               R.layout.activity_custom, R.id.textView, results);
-        setListAdapter(mAdapter);
-
-        // не забываем закрывать курсор
-        cursor.close();
-    }
-
-  /*  private void displayResultList() {
-        *//*TextView tView = new TextView(this);
-        tView.setText(results.get(5));
-        getListView().addHeaderView(tView);*//*
-
-        setListAdapter(new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, results));
-        //getListView().setTextFilterEnabled(true);
-
-    }*/
-
-  /*  private void openAndQueryDatabase() {
-        try {
-            DatabaseHelper dbHelper = new DatabaseHelper(this.getApplicationContext());
-            newDB = dbHelper.getWritableDatabase();
-            Cursor c = newDB.rawQuery("SELECT name FROM " +
-                    tableName, null);
-            Log.w(getClass().getSimpleName(), "Move to First: " + c.moveToFirst());
-            if (c != null ) {
-                if  (c.moveToFirst()) {
-                    do {
-                        String firstName = c.getString(c.getColumnIndex("name"));
-                        results.add("name: " + firstName);
-                    }while (c.moveToNext());
-                }
             }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                MyActivity.this.mAdapter.getFilter().filter(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        TextView textView = (TextView) findViewById(R.id.textView);
+        Log.v("textview ", (String) l.getItemAtPosition(position));
+        Intent intent = new Intent(MyActivity.this, PaymantsActivity.class);
+        intent.putExtra("name", (String) l.getItemAtPosition(position));
+        startActivity(intent);
+    }
+
+    private void displayResultList(ArrayList<String> clientList) {
+        mAdapter = new ArrayAdapter<String>(this,
+                R.layout.list_item, R.id.textView, clientList);
+        //mMainListView.setAdapter(mAdapter);
+        setListAdapter(mAdapter);
+    }
+
+    private ArrayList<String> openAndQueryClientsListDatabase() {
+        try {
+            mDatabaseHelper = new DatabaseHelper(this, "englishme.db", null, 1);
+
+            mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
+            Cursor cursor = mSqLiteDatabase.query("clients", new String[]{DatabaseHelper.NAME_COLUMN,
+                            DatabaseHelper.PHONE_COLUMN, DatabaseHelper.DATE_COLUMN},
+                            null, null, null, null, DatabaseHelper.NAME_COLUMN) ;
+            while (cursor.moveToNext()) {
+                String clientName = cursor.getString(cursor.getColumnIndex(DatabaseHelper.NAME_COLUMN));
+                results.add(clientName);
+            }
+
+            Log.w(getClass().getSimpleName(), "results size: " + results.size());
+            // не забываем закрывать курсор
+            cursor.close();
+            return results;
         } catch (SQLiteException se ) {
             Log.e(getClass().getSimpleName(), "Could not create or Open the database");
-        } *//*finally {
-            if (newDB != null)
-                newDB.execSQL("DELETE FROM " + tableName);
-            newDB.close();
-        }*//*
+        }
+        return null;
+    }
 
-    }*/
 }
