@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:weightSum="1" android:background="@color/background_color"
+              tools:context=".PaymantsActivity">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Client Name"
+            android:id="@+id/clientNameTextView" android:layout_weight="0.10" android:textColor="@android:color/black"
+            android:textStyle="bold" android:paddingStart="10dp" android:paddingEnd="10dp"
+            android:gravity="center_vertical" android:textSize="25dp" android:layout_gravity="center_horizontal"/>
+    <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/phoneBlock"
+            android:layout_gravity="center_horizontal">
+        <TextView android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="Phone"
+                  android:id="@+id/phoneTextView" android:layout_weight="0.10" android:textColor="@android:color/black"
+                  android:textStyle="bold" android:paddingStart="10dp" android:paddingEnd="10dp"
+                  android:textSize="25dp"
+                  android:gravity="center_vertical"
+                  android:layout_gravity="center_vertical" android:clickable="false"/>
+        <ImageView
+                android:layout_width="30dp"
+                android:layout_height="57dp"
+                android:id="@+id/smsButton" android:layout_weight="0.01"
+                android:scaleType="centerCrop" android:src="@drawable/messages" android:layout_marginRight="20dp"/>
+    </TableRow>
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/payments"
+            android:id="@+id/paymentsLabel" android:height="15dp" android:textColor="@android:color/black"
+            android:layout_weight="0.05" android:textSize="20dp"/>
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/paymentsEditText" android:layout_weight="0.05" android:textColor="@android:color/black"
+            android:background="@drawable/input"/>
+    <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/dateOfPayments"
+              android:id="@+id/paymentsDateLabel" android:height="15dp" android:textColor="@android:color/black"
+              android:layout_weight="0.05" android:textSize="20dp" android:paddingTop="5dp"/>
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:ems="10"
+            android:id="@+id/paymentsDateEditText" android:layout_weight="0.05" android:textColor="@android:color/black"
+            android:background="@drawable/input"/>
+    <Button
+            android:layout_width="198dp"
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            android:id="@+id/buttonSave" android:layout_gravity="center_horizontal" android:layout_weight="0.03"
+            android:textColor="@android:color/black" android:onClick="onClick"/>
+</LinearLayout>
