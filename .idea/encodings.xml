@@ -3,7 +3,9 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/res/drawable-hdpi/launcher.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-hdpi/logo.jpg" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/messages.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/example/EnglishMeApp/ClientListActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/example/EnglishMeApp/DatabaseHelper.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/com/example/EnglishMeApp/MyActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/example/EnglishMeApp/MainActivity.java" charset="UTF-8" />
   </component>
 </project>

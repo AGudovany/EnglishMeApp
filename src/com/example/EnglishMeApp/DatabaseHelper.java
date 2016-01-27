@@ -17,15 +17,21 @@ import java.io.IOException;
 public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
     private static final String DATABASE_NAME = "englishme.db";
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_TABLE = "clients";
+    public static final String KEY_ROWID = "_id";
+    private static final String CLIENT_TABLE = "clients";
+    private static final String PAYMENTS_TABLE = "payments";
     public static final String NAME_COLUMN = "name";
     public static final String PHONE_COLUMN = "phone";
     public static final String DATE_COLUMN = "date";
-    private static final String DATABASE_CREATE_SCRIPT = "create table "
-            + DATABASE_TABLE + " (" + BaseColumns._ID
+    public static final String CLIENT_ID_COLUMN = "client_id";
+    private static final String CREATE_CLIENTS_TABLE = "create table "
+            + CLIENT_TABLE + " (" + BaseColumns._ID
             + " integer primary key autoincrement, " + NAME_COLUMN
-            + " text not null, " + PHONE_COLUMN + " integer, " + DATE_COLUMN
-            + " text);";
+            + " text not null, " + PHONE_COLUMN + " text);";
+    private static final String CREATE_PAYMENTS_TABLE = "create table "
+            + PAYMENTS_TABLE + " (" + BaseColumns._ID
+            + " integer primary key autoincrement, " + CLIENT_ID_COLUMN
+            + " integer not null, " + DATE_COLUMN + " text);";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -41,7 +47,10 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL(DATABASE_CREATE_SCRIPT);
+        //Create Tables
+        sqLiteDatabase.execSQL(CREATE_CLIENTS_TABLE);
+        sqLiteDatabase.execSQL(CREATE_PAYMENTS_TABLE);
+
         sqLiteDatabase.execSQL("INSERT INTO clients (name, phone) values('Рябошапка Лиза Константиновна',0678646414);");
         sqLiteDatabase.execSQL("INSERT INTO clients (name, phone) values('Вивдич Юлия Васильевна',0675004806);");
         sqLiteDatabase.execSQL("INSERT INTO clients (name, phone) values('Косташ Уляна Андреевна',0637673021);");

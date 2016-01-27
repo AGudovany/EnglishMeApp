@@ -4,4 +4,6 @@
     <string name="search">Пошук...</string>
     <string name="payments">Сума оплати</string>
     <string name="dateOfPayments">Дата оплати</string>
+    <string name="save">Зберегти</string>
+    <string name="client_list">Список клієнтів</string>
 </resources>
