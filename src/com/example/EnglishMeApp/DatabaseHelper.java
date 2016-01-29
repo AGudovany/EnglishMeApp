@@ -18,10 +18,11 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
     private static final String DATABASE_NAME = "englishme.db";
     private static final int DATABASE_VERSION = 1;
     public static final String KEY_ROWID = "_id";
-    private static final String CLIENT_TABLE = "clients";
-    private static final String PAYMENTS_TABLE = "payments";
+    public static final String CLIENT_TABLE = "clients";
+    public static final String PAYMENTS_TABLE = "payments";
     public static final String NAME_COLUMN = "name";
     public static final String PHONE_COLUMN = "phone";
+    public static final String PAY_AMOUNT_COLUMN = "pay_amount";
     public static final String DATE_COLUMN = "date";
     public static final String CLIENT_ID_COLUMN = "client_id";
     private static final String CREATE_CLIENTS_TABLE = "create table "
@@ -31,7 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
     private static final String CREATE_PAYMENTS_TABLE = "create table "
             + PAYMENTS_TABLE + " (" + BaseColumns._ID
             + " integer primary key autoincrement, " + CLIENT_ID_COLUMN
-            + " integer not null, " + DATE_COLUMN + " text);";
+            + " integer not null, " + DATE_COLUMN + " text, " + PAY_AMOUNT_COLUMN + " real);";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

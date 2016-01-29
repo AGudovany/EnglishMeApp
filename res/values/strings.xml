@@ -2,8 +2,10 @@
 <resources>
     <string name="app_name">EnglishMe</string>
     <string name="search">Пошук...</string>
-    <string name="payments">Сума оплати</string>
+    <string name="payment_amount">Сума оплати</string>
     <string name="dateOfPayments">Дата оплати</string>
     <string name="save">Зберегти</string>
     <string name="client_list">Список клієнтів</string>
+    <string name="payment">Оплата</string>
+    <string name="payments_list">Оплати</string>
 </resources>

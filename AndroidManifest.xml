@@ -8,7 +8,9 @@
         <activity android:name=".ClientListActivity"
                   android:label="@string/client_list">
         </activity>
-        <activity android:name=".PaymantsActivity" android:label="Оплата">
+        <activity android:name=".PaymantsActivity" android:label="@string/payment">
+        </activity>
+        <activity android:name=".PaymentsListActivity" android:label="@string/payments_list">
         </activity>
         <activity android:name=".MainActivity"
                   android:label="@string/app_name">

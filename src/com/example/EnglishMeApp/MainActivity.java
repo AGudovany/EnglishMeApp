@@ -23,8 +23,8 @@ public class MainActivity extends TabActivity {
         tabHost.addTab(tabSpec);
 
         tabSpec = tabHost.newTabSpec("tab2");
-        tabSpec.setIndicator("Оплата");
-        tabSpec.setContent(new Intent(this, PaymantsActivity.class));
+        tabSpec.setIndicator("Оплати");
+        tabSpec.setContent(new Intent(this, PaymentsListActivity.class));
         tabHost.addTab(tabSpec);
     }
 }

@@ -29,32 +29,37 @@
                 android:scaleType="centerCrop" android:src="@drawable/messages" android:layout_marginRight="20dp"/>
     </TableRow>
     <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/payments"
+            android:text="@string/payment_amount"
             android:id="@+id/paymentsLabel" android:height="15dp" android:textColor="@android:color/black"
-            android:layout_weight="0.05" android:textSize="20dp"/>
+            android:layout_weight="0.05" android:textSize="20dp" android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp" android:layout_marginTop="20dp"/>
     <EditText
-            android:layout_width="match_parent"
+            android:layout_width="215dp"
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
             android:id="@+id/paymentsEditText" android:layout_weight="0.05" android:textColor="@android:color/black"
-            android:background="@drawable/input"/>
-    <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/dateOfPayments"
+            android:background="@drawable/input" android:layout_gravity="center_horizontal"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/dateOfPayments"
               android:id="@+id/paymentsDateLabel" android:height="15dp" android:textColor="@android:color/black"
-              android:layout_weight="0.05" android:textSize="20dp" android:paddingTop="5dp"/>
-    <EditText
-            android:layout_width="match_parent"
+              android:layout_weight="0.05" android:textSize="20dp"
+              android:layout_gravity="center_horizontal" android:layout_marginTop="30dp"
+              android:layout_marginBottom="10dp"/>
+    <TextView
+            android:layout_width="215dp"
             android:layout_height="wrap_content"
-            android:inputType="date"
             android:ems="10"
-            android:id="@+id/paymentsDateEditText" android:layout_weight="0.05" android:textColor="@android:color/black"
+            android:id="@+id/paymentsDateText" android:layout_weight="0.08" android:textColor="@android:color/black"
+            android:layout_gravity="center" android:textSize="15dp"
+            android:singleLine="false" android:clickable="false" android:phoneNumber="false"
+            android:textIsSelectable="false" android:gravity="center_vertical|center_horizontal"
             android:background="@drawable/input"/>
     <Button
             android:layout_width="198dp"
             android:layout_height="wrap_content"
             android:text="@string/save"
-            android:id="@+id/buttonSave" android:layout_gravity="center_horizontal" android:layout_weight="0.03"
-            android:textColor="@android:color/black" android:onClick="onClick"/>
+            android:id="@+id/buttonSave" android:layout_gravity="center_horizontal"
+            android:textColor="@android:color/black" android:onClick="onClick" android:layout_marginTop="30dp"/>
 </LinearLayout>
