@@ -1,25 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-              android:layout_height="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
               android:orientation="vertical"
-              android:background="@color/background_color" tools:context=".PaymentsListActivity">
+              android:background="@color/background_color">
     <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="215dp"
             android:layout_height="wrap_content"
             android:id="@+id/payDate"
-            android:background="@drawable/shape"
             android:textColor="@android:color/black" android:layout_weight="0.04"
-            android:height="20dp" android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp" android:layout_marginBottom="20dp"/>
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/sum_payments"
-              android:background="@drawable/shape" android:textColor="@android:color/black" android:layout_weight="0.04"
-              android:height="20dp" android:layout_gravity="right" android:layout_marginTop="20dp"
-              android:layout_marginBottom="20dp"/>
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp" android:layout_marginBottom="20dp" android:background="@drawable/input"
+            android:autoText="false" android:textSize="15dp" android:gravity="center_vertical|center_horizontal"
+            android:height="30dp" android:layout_alignParentTop="true" android:layout_alignParentStart="false"
+            android:layout_alignParentEnd="false" android:layout_centerHorizontal="true"/>
     <ListView android:id="@android:id/list"
               android:layout_width="fill_parent"
-              android:background="@color/background_color"
-              android:layout_height="fill_parent" android:divider="@android:color/darker_gray" android:dividerHeight="0.1dp"
-              android:drawSelectorOnTop="true" android:layout_weight="0.85"/>
-</LinearLayout>
+              android:background="@drawable/listlines"
+              android:layout_height="0dp" android:divider="@android:color/darker_gray" android:dividerHeight="0.1dp"
+              android:drawSelectorOnTop="true" android:layout_weight="1"
+              android:layout_alignParentStart="false"
+              android:layout_above="@+id/tableRow" android:layout_below="@+id/payDate" android:paddingTop="1dp"/>
+    <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="bottom" android:background="@color/background_color"
+            android:layout_alignParentBottom="true" android:id="@+id/tableRow">
+        <TextView android:layout_width="0dp" android:layout_height="40dp" android:id="@+id/SumLabel"
+                  android:textColor="@android:color/black" android:layout_weight="1" android:height="20dp"
+                  android:layout_marginTop="20dp" android:layout_marginBottom="20dp"
+                  android:clickable="false" android:text="@string/sum_label" android:singleLine="false"
+                  android:layout_gravity="left" android:gravity="center_vertical|right" android:textStyle="bold"
+                  android:textSize="25dp"/>
+        <TextView android:layout_width="0dp" android:layout_height="40dp" android:id="@+id/sum_payments"
+                  android:textColor="@android:color/black" android:layout_weight="0.5"
+                  android:height="20dp" android:layout_gravity="right" android:layout_marginTop="20dp"
+                  android:layout_marginBottom="20dp" android:gravity="center_vertical|right" android:textStyle="bold"
+                  android:textSize="25dp"/>
+    </TableRow>
+</RelativeLayout>
 

@@ -8,4 +8,5 @@
     <string name="client_list">Список клієнтів</string>
     <string name="payment">Оплата</string>
     <string name="payments_list">Оплати</string>
+    <string name="sum_label">Загальна сума:</string>
 </resources>

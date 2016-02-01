@@ -28,6 +28,7 @@ public class PaymentsListActivity extends ListActivity {
     private TextView mDateSearch;
     private TextView mSumPayments;
     private Calendar calendar;
+    private String dateValue;
     private SimpleAdapter mAdapter;
     private static final String NAME = "name";
     private static final String PAYMENT = "payment";
@@ -48,8 +49,9 @@ public class PaymentsListActivity extends ListActivity {
         mDateSearch = (TextView) findViewById(R.id.payDate);
         mSumPayments = (TextView) findViewById(R.id.sum_payments);
         Log.e(getClass().getSimpleName(), "mDateSearch" + mDateSearch);
+        dateValue = ((day < 10) ? "0" : "") + String.valueOf(day) + "." + ((month + 1 < 10) ? "0" : "") + String.valueOf(month + 1) + "." + String.valueOf(year);
 
-        mDateSearch.setText(((day < 10) ? "0" : "") + String.valueOf(day) + "." + ((month+1 < 10) ? "0" : "") + String.valueOf(month+1) + "." + String.valueOf(year));
+        mDateSearch.setText(dateValue);
 
         QueryPaymentsListDatabase();
         displayResultList(results);
@@ -76,8 +78,9 @@ public class PaymentsListActivity extends ListActivity {
             String query = "SELECT " + DatabaseHelper.NAME_COLUMN + ", "
                     + DatabaseHelper.PAY_AMOUNT_COLUMN + " FROM " + DatabaseHelper.PAYMENTS_TABLE
                     + ", " + DatabaseHelper.CLIENT_TABLE + " WHERE " + DatabaseHelper.CLIENT_ID_COLUMN
-                    + " = clients._id";
-            Log.e(getClass().getSimpleName(), query);
+                    + " = " + DatabaseHelper.CLIENT_TABLE + "." + DatabaseHelper.KEY_ROWID + " AND "
+                    + DatabaseHelper.PAYMENTS_TABLE + "." + DatabaseHelper.DATE_COLUMN + "='" + dateValue + "'";
+            //Log.e(getClass().getSimpleName(), query);
             Cursor cursor = mSqLiteDatabase.rawQuery(query, null);
             while (cursor.moveToNext()) {
                 hm = new HashMap<>();
@@ -87,7 +90,7 @@ public class PaymentsListActivity extends ListActivity {
                 SUM_PAYMENT = SUM_PAYMENT + cursor.getDouble(cursor.getColumnIndex(DatabaseHelper.PAY_AMOUNT_COLUMN));
             }
             cursor.close();
-            Log.e(getClass().getSimpleName(), "SUM_PAYMENT" + SUM_PAYMENT);
+            //Log.e(getClass().getSimpleName(), "SUM_PAYMENT" + SUM_PAYMENT);
             return results;
         } catch (SQLiteException se ) {
             Log.e(getClass().getSimpleName(), "Could not Open the database");
@@ -108,7 +111,12 @@ public class PaymentsListActivity extends ListActivity {
             // arg1 = year
             // arg2 = month
             // arg3 = day
-            mDateSearch.setText(((arg3< 10) ? "0" : "") + String.valueOf(arg3) + "." + ((arg2 + 1 < 10) ? "0" : "") + String.valueOf(arg2+1) + "." + String.valueOf(arg1));
+            dateValue = ((arg3< 10) ? "0" : "") + String.valueOf(arg3) + "." + ((arg2 + 1 < 10) ? "0" : "") + String.valueOf(arg2+1) + "." + String.valueOf(arg1);
+            mDateSearch.setText(dateValue);
+            results.clear();
+            SUM_PAYMENT = 0;
+            QueryPaymentsListDatabase();
+            displayResultList(results);
         }
     };
 

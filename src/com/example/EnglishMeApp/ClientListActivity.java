@@ -34,10 +34,11 @@ public class ClientListActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.clients_list);
         //mMainListView = (ListView) findViewById(R.id.mainListView);
 
-        /*mClientList = */openAndQueryClientsListDatabase();
+        /*mClientList = */
+        openAndQueryClientsListDatabase();
         displayResultList(results);
 
 

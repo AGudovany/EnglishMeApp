@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
               android:background="@color/background_color">
     <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:hint="@string/search"
             android:id="@+id/searchText"
             android:background="@drawable/shape"
             android:textColor="@android:color/black" android:layout_weight="0.04" android:paddingStart="10dp"
-            android:paddingEnd="10dp" android:height="20dp"/>
+            android:paddingEnd="10dp" android:height="20dp" android:layout_alignParentTop="true"/>
     <ListView android:id="@android:id/list"
               android:layout_width="fill_parent"
               android:background="@color/background_color"
               android:layout_height="0dp" android:divider="@android:color/darker_gray" android:dividerHeight="0.1dp"
-              android:drawSelectorOnTop="true" android:layout_weight="0.98"/>
-</LinearLayout>
+              android:drawSelectorOnTop="true" android:layout_weight="0.98"
+              android:layout_below="@+id/searchText" android:layout_alignParentBottom="true"/>
+</RelativeLayout>
 

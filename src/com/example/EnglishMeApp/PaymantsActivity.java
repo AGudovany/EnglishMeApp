@@ -3,8 +3,10 @@ package com.example.EnglishMeApp;
 import android.app.*;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -22,6 +24,8 @@ public class PaymantsActivity extends Activity{
     private int year, month, day;
     private TextView nameView, phoneView, paymentDate;
     private ImageView smsView;
+    private DatabaseHelper mDatabaseHelper;
+    private SQLiteDatabase mSqLiteDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +45,7 @@ public class PaymantsActivity extends Activity{
         nameView.setText(getIntent().getStringExtra("name"));
         phoneView.setText(phone);
         paymentDate.setText(((day < 10) ? "0" : "") + String.valueOf(day) + "." + ((month+1 < 10) ? "0" : "") + String.valueOf(month+1) + "." + String.valueOf(year));
-
+        //Log.e(getClass().getSimpleName(), "ID " + getIntent().getLongExtra("id", 0));
         phoneView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,6 +75,15 @@ public class PaymantsActivity extends Activity{
     public void onClick(View view) {
         EditText mPayment = (EditText) findViewById(R.id.paymentsEditText);
         TextView mPaymentDate = (TextView) findViewById(R.id.paymentsDateText);
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.DATE_COLUMN, mPaymentDate.getText().toString());
+        values.put(DatabaseHelper.PAY_AMOUNT_COLUMN, mPayment.getText().toString());
+        values.put(DatabaseHelper.CLIENT_ID_COLUMN, getIntent().getLongExtra("id",0));
+        // вызываем метод вставки
+        mDatabaseHelper = new DatabaseHelper(this, "englishme.db", null, 1);
+        mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
+        mSqLiteDatabase.insert(mDatabaseHelper.PAYMENTS_TABLE, null, values);
+        mPayment.setText("");
     }
 
     @Override
