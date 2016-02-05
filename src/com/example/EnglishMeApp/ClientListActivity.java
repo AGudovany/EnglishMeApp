@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class ClientListActivity extends ListActivity {
+public class ClientListActivity extends ListActivity{
     /**
      * Called when the activity is first created.
      */
@@ -41,8 +41,9 @@ public class ClientListActivity extends ListActivity {
         openAndQueryClientsListDatabase();
         displayResultList(results);
 
-
         mInputSearch = (EditText) findViewById(R.id.searchText);
+        mMainListView = getListView();
+
         mInputSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -60,7 +61,22 @@ public class ClientListActivity extends ListActivity {
             }
         });
 
+        mMainListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String selectedItem = adapterView.getItemAtPosition(i).toString();
+
+                Log.e(getClass().getSimpleName(), "LONG Click?");
+                Toast.makeText(getApplicationContext(),
+                        selectedItem + " удалён.",
+                        Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+
     }
+
+
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
@@ -76,6 +92,7 @@ public class ClientListActivity extends ListActivity {
         intent.putExtra("phone", phoneItem);
         startActivity(intent);
     }
+
 
     private void displayResultList(ArrayList<HashMap<String,Object>> clientList) {
         /*mAdapter = new ArrayAdapter<String>(this,
@@ -110,4 +127,16 @@ public class ClientListActivity extends ListActivity {
         return null;
     }
 
+ /*   @Override
+    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+        String selectedItem = adapterView.getItemAtPosition(i).toString();
+
+        *//*mAdapter.remove(selectedItem);
+        mAdapter.notifyDataSetChanged();*//*
+        Log.e(getClass().getSimpleName(), "LONG Click?");
+        Toast.makeText(getApplicationContext(),
+                selectedItem + " удалён.",
+                Toast.LENGTH_SHORT).show();
+        return true;
+    }*/
 }

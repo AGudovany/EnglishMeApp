@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -29,6 +29,7 @@ public class PaymantsActivity extends Activity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_info);
         nameView = (TextView) findViewById(R.id.clientNameTextView);
@@ -103,4 +104,9 @@ public class PaymantsActivity extends Activity{
             paymentDate.setText(((arg3< 10) ? "0" : "") + String.valueOf(arg3) + "." + ((arg2 + 1 < 10) ? "0" : "") + String.valueOf(arg2+1) + "." + String.valueOf(arg1));
         }
     };
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.client_menu, menu);
+        return true;
+    }
 }

@@ -3,7 +3,12 @@ package com.example.EnglishMeApp;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TabHost;
+import android.widget.Toast;
 
 /**
  * Created by GudovanyiAlexey on 27.01.2016.
@@ -27,4 +32,11 @@ public class MainActivity extends TabActivity {
         tabSpec.setContent(new Intent(this, PaymentsListActivity.class));
         tabHost.addTab(tabSpec);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
 }

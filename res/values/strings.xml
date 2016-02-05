@@ -9,4 +9,8 @@
     <string name="payment">Оплата</string>
     <string name="payments_list">Оплати</string>
     <string name="sum_label">Загальна сума:</string>
+    <string name="action_settings">Налаштування</string>
+    <string name="action_refresh">Оновити</string>
+    <string name="action_edit">Редагувати</string>
+    <string name="action_delete">Видалати</string>
 </resources>
